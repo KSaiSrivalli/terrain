@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terrain Classification</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Terrain Classification and Analysis</h1>
+        <p class="text-center">Upload an image of terrain to classify and analyze its roughness and slipperiness.</p>
+
+        <!-- Form for uploading an image -->
+        <form method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="file" class="form-label">Choose an Image</label>
+                <input type="file" class="form-control" id="file" name="file" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Upload Image</button>
+        </form>
+
+        {% if img_filename %}
+        <div class="mt-5">
+            <h2 class="text-center">Prediction Results</h2>
+
+            <!-- Display uploaded image -->
+            <div class="text-center">
+                <img src="{{ url_for('static', filename='uploads/' + img_filename) }}" alt="Uploaded Image" class="img-fluid" width="300">
+            </div>
+
+            <p class="text-center"><strong>Predicted Terrain Class:</strong> {{ predicted_class }}</p>
+            <p class="text-center"><strong>Roughness Level:</strong> {{ predicted_roughness }}</p>
+            <p class="text-center"><strong>Slipperiness Level:</strong> {{ predicted_slipperiness }}</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
